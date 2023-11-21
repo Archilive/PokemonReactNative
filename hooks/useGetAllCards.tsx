@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import { PokemonTypes } from '../themes/themes';
 
 export type Card = {
   pokedexId: number;
@@ -17,7 +18,7 @@ export type Card = {
     gmax: string | null;
   };
   types: {
-    name: string;
+    name: PokemonTypes;
     image: string;
   }[];
   talents: {
@@ -69,7 +70,12 @@ export const useGetAllCards = () => {
   });
 
   const filterData = data
-    ? data.filter((card) => card.generation === 1 && card.pokedexId !== 0)
+    ? data.filter(
+        (card) =>
+          card.generation === 1 &&
+          card.pokedexId !== 0 &&
+          (card.evolution == null || card.evolution.next == null)
+      )
     : [];
   return { data: filterData, ...rest };
 };

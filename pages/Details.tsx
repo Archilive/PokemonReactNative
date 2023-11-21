@@ -8,11 +8,12 @@ import {
   Image,
   ActivityIndicator,
   ImageBackground,
-  TouchableOpacity,
 } from 'react-native';
 import { useGetCardById } from '../hooks/useGetCardById';
 import HeartAnimation from '../components/HeartAnimation';
 import TypesComponent from '../components/TypesComponent';
+import GoBackButton from '../components/GoBackButton';
+import ButtonScrollView from '../components/ButtonScrollView';
 
 export default function Details({ route, navigation }: any) {
   const { pokemonId } = route.params;
@@ -27,27 +28,29 @@ export default function Details({ route, navigation }: any) {
     return <Text style={styles.textDataMissing}>No data available</Text>;
   }
 
-  const navigateToBack = (): any => {
-    navigation.goBack();
-  };
-
   return (
     <ImageBackground
       style={styles.background}
-      source={require('../assets/selectedPokemonPage/background2.png')}
+      blurRadius={50}
+      // resizeMode="contain"
+      source={{ uri: data.sprites.regular }}
     >
-      <TouchableOpacity style={styles.goback} onPress={navigateToBack}>
-        <Image source={require('../assets/arrow_back.png')} />
-      </TouchableOpacity>
+      {/* <ImageBackground
+        style={styles.background2}
+        resizeMode="contain"
+
+        source={require('../assets/selectedPokemonPage/background2.png')}
+      > */}
+      <StatusBar style="light" />
+      <GoBackButton top={'10%'} />
 
       <HeartAnimation />
 
       <SafeAreaView style={styles.container}>
-        <StatusBar style="auto" />
         <View>
           <View key={data.pokedexId}>
             <Text style={styles.pokemonId}>#{data.pokedexId}</Text>
-            <Text style={styles.pokemonName}>{data.name.fr}</Text>
+            <Text style={styles.pokemonName}>{data.name.en}</Text>
             <Image
               style={styles.cardImage}
               source={{
@@ -55,11 +58,16 @@ export default function Details({ route, navigation }: any) {
               }}
             />
 
-            <TypesComponent data={data} />
+            <View style={styles.typesContainer}>
+              <TypesComponent data={data} />
+            </View>
           </View>
         </View>
       </SafeAreaView>
+
+      {/* <ButtonScrollView /> */}
     </ImageBackground>
+    // </ImageBackground>
   );
 }
 
@@ -74,6 +82,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     backgroundColor: '#000000',
+  },
+
+  textDataMissing: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 40,
+    top: 400,
+    fontStyle: 'normal',
+    fontWeight: '400',
+    lineHeight: 40,
+  },
+
+  background: {
+    backgroundColor: '#232323',
+    width: '100%',
+    height: '100%',
+    flex: 1,
+  },
+
+  background2: {
+    flex: 1,
+    opacity: 0.3,
   },
 
   text: {
@@ -106,39 +136,14 @@ const styles = StyleSheet.create({
     lineHeight: 40,
   },
 
-  background: {
-    backgroundColor: '#000000',
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-  },
-
-  textDataMissing: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 40,
-    top: 400,
-    fontStyle: 'normal',
-    fontWeight: '400',
-    lineHeight: 40,
-  },
-
   cardImage: {
     height: 400,
     resizeMode: 'cover',
     borderRadius: 10,
   },
 
-  goback: {
-    backgroundColor: '#373737',
-    width: 48,
-    height: 48,
-    borderRadius: 9,
-    position: 'absolute',
-    top: '10%',
-    left: '4%',
-    justifyContent: 'center',
+  typesContainer: {
     alignItems: 'center',
-    zIndex: 1,
+    
   },
 });

@@ -13,14 +13,12 @@ import {
 import { useGetAllCards } from '../hooks/useGetAllCards';
 import TypesComponent from '../components/TypesComponent';
 import { getTypeColor } from '../themes/themes';
+import GoBackButton from '../components/GoBackButton';
 
 export default function Selection({ navigation }: any) {
+  
   const navigateToSelect = (pokemonId: number) => {
     navigation.navigate('Details', { pokemonId });
-  };
-
-  const navigateToBack = (): any => {
-    navigation.goBack();
   };
 
   const { data, isFetching } = useGetAllCards();
@@ -32,11 +30,10 @@ export default function Selection({ navigation }: any) {
   return (
     <ImageBackground
       style={styles.background}
+      resizeMode="contain"
       source={require('../assets/selectPage/pokeball.png')}
     >
-      <TouchableOpacity style={styles.goback} onPress={navigateToBack}>
-        <Image source={require('../assets/arrow_back.png')} />
-      </TouchableOpacity>
+      <GoBackButton top={'4%'} />
 
       <Image
         style={styles.user}
@@ -51,6 +48,7 @@ export default function Selection({ navigation }: any) {
             style={{
               fontStyle: 'normal',
               fontWeight: 'bold',
+              fontSize: 35,
             }}
           >
             Pokémon
@@ -65,17 +63,18 @@ export default function Selection({ navigation }: any) {
             />
           </View>
         </Text>
-        <Text style={styles.pokedex}>
+        <Text style={styles.pokedexLength}>
           {data?.length} Pokémons in your Pokedex
         </Text>
+
         <ScrollView style={styles.scrollviewlist}>
           {Array.isArray(data) ? (
             data.map((card) => (
               <TouchableOpacity
-                style={
-                  (styles.cardContainer,
-                  { backgroundColor: getTypeColor(card.types[0].name) })
-                }
+                style={{
+                  ...styles.cardContainer,
+                  backgroundColor: getTypeColor(card.types[0].name),
+                }}
                 onPress={() => navigateToSelect(card.pokedexId)}
                 key={card.pokedexId}
               >
@@ -90,7 +89,7 @@ export default function Selection({ navigation }: any) {
               </TouchableOpacity>
             ))
           ) : (
-            <Text style={styles.text}>No data available</Text>
+            <Text style={styles.textDataMissing}>No data available</Text>
           )}
         </ScrollView>
       </View>
@@ -112,30 +111,24 @@ const styles = StyleSheet.create({
   },
 
   background: {
+    width: '100%',
+    height: '100%',
     backgroundColor: '#000000',
     flex: 1,
-    resizeMode: 'cover',
-  },
-
-  cardContainer: {
-    borderRadius: 15,
   },
 
   title: {
     color: 'white',
-    fontSize: 30,
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontSize: 35,
+    fontWeight: '200',
     lineHeight: 40,
-    width: '50%',
-    // pointerEvents: 'none',
+    width: '60%',
     marginHorizontal: '5%',
     top: '15%',
   },
 
-  text: {
+  textDataMissing: {
     color: 'white',
-    // textAlign: 'center',
     fontSize: 20,
     fontStyle: 'normal',
     fontWeight: '400',
@@ -143,38 +136,7 @@ const styles = StyleSheet.create({
     pointerEvents: 'none',
   },
 
-  pokemonName: {
-    color: '#000000',
-    fontSize: 20,
-    fontStyle: 'normal',
-    fontWeight: '400',
-    lineHeight: 30,
-    marginLeft: 10,
-  },
-
-  goback: {
-    backgroundColor: '#373737',
-    width: 48,
-    height: 48,
-    borderRadius: 9,
-    position: 'absolute',
-    top: '4%',
-    left: '4%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  scrollviewlist: {
-    width: '100%',
-    height: '80%',
-    color: '#FFFFFF',
-    position: 'absolute',
-    top: '30%',
-    left: '39%',
-    backgroundColor: '#373737',
-  },
-
-  pokedex: {
+  pokedexLength: {
     color: '#FFF',
     fontSize: 15,
     fontStyle: 'normal',
@@ -185,34 +147,40 @@ const styles = StyleSheet.create({
     marginHorizontal: '5%',
   },
 
-  cardImage: {
-    width: 150,
-    height: 150,
-    resizeMode: 'cover',
-    borderRadius: 10,
-    justifyContent: 'center',
+  scrollviewlist: {
+    width: '100%',
+    height: '80%',
+    position: 'absolute',
+    top: '30%',
+    left: '30%',
+  },
+
+  cardContainer: {
+    width: 374,
+    height: 250,
+    borderRadius: 15,
     alignSelf: 'center',
+    flexDirection: 'column',
+    padding: 12,
   },
 
-  typesContainer: {
-    marginLeft: 10,
-    paddingHorizontal: 10,
-    borderRadius: 24,
-    backgroundColor: 'rgba(0, 0, 0, 0.10)',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
+  pokemonName: {
+    marginTop: 'auto',
+    color: '#000000',
+    fontSize: 20,
+    fontWeight: '400',
+    marginLeft: 5,
   },
 
-  types: {
-    width: 15,
-    height: 15,
-    marginHorizontal: 5,
+  cardImage: {
+    width: 250,
+    height: 250,
+    position: 'relative',
+    overflow: 'visible',
     resizeMode: 'cover',
-    borderRadius: 10,
-    marginBottom: 10,
+    alignSelf: 'center',
+    top: '-30%',
+    // pointerEvents: 'none',
   },
 
   user: {
@@ -224,71 +192,3 @@ const styles = StyleSheet.create({
     left: '84%',
   },
 });
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#000',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   backgroundpoke: {
-//     position: 'absolute',
-//     top: '18%',
-
-//     left: '-30%',
-
-//     // zIndex: 1,
-//     width: '110%',
-
-//     height: '60%',
-//   },
-//
-//   title: {
-//     fontSize: 35.88, // Utilisez simplement le nombre pour définir la taille de la police
-//     // fontFamily: 'clash-display', // Assurez-vous que le nom de la police est correctement défini dans votre application
-//     fontWeight: '300', // Utilisez une chaîne pour définir le poids de la police
-//     color: '#FFFFFF',
-//     position: 'absolute',
-//     top: '16%',
-//     left: '4%',
-//   },
-//   boldtext: {
-//     fontSize: 47.83,
-//     fontWeight: '600',
-//     color: '#FFFFFF',
-//     position: 'absolute',
-//     top: '21%',
-//     left: '4%',
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     alignContent: 'flex-start',
-//   },
-//
-//   pokemonnumber: {
-//     fontSize: 20,
-//     lineHeight: 28,
-//     fontWeight: '400',
-//     color: '#FFFFFF',
-//     position: 'absolute',
-//     left: '4%',
-//     top: '80%',
-//     width: '35%',
-//   },
-//   scrollview: {
-//     width: '100%',
-//     height: '80%',
-//     color: '#FFFFFF',
-//     zIndex: 2,
-//     position: 'absolute',
-//     top: '30%',
-//     left: '39%',
-//     backgroundColor: '#373737',
-//   },
-//   pokemoncard: {
-//     width: 374,
-//     height: 299,
-//     backgroundColor: '#FFFFFF',
-//     borderRadius: 12,
-//     alignSelf: 'center',
-//   },
-// });

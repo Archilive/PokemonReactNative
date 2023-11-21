@@ -8,14 +8,14 @@ const TypeDetails = ({ typeData }: any) => {
 
   return (
     <View style={styles.typesContainer}>
+      <Image style={styles.types} source={{ uri: typeData.image }} />
       <Text
         style={{
           color: 'black',
-          justifyContent: 'center',
           textAlign: 'center',
+          
         }}
       >
-        <Image style={styles.types} source={{ uri: typeData.image }} />
         {typeData.name}
       </Text>
     </View>
@@ -33,24 +33,21 @@ const TypesComponent = ({ data }: any) => {
 
 const styles = StyleSheet.create({
   typesContainer: {
-    marginLeft: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 5,
     paddingHorizontal: 10,
     borderRadius: 24,
     backgroundColor: 'rgba(0, 0, 0, 0.10)',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
+    gap: 5,
   },
 
   types: {
-    borderRadius: 40,
-    width: 25,
-    height: 25,
-    marginHorizontal: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: 45,
+    width: 15,
+    height: 15,
   },
 });
 
