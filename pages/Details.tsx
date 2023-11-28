@@ -9,13 +9,14 @@ import {
   ActivityIndicator,
   ImageBackground,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useGetCardById } from '../hooks/useGetCardById';
 import HeartAnimation from '../components/HeartAnimation';
 import TypesComponent from '../components/TypesComponent';
 import GoBackButton from '../components/GoBackButton';
-import ButtonScrollView from '../components/ButtonScrollView';
+import ButtonMenu from '../components/ButtonMenuComponent';
 
-export default function Details({ route, navigation }: any) {
+export default function Details({ route }: any) {
   const { pokemonId } = route.params;
 
   const { data, isFetching, isError } = useGetCardById(pokemonId);
@@ -32,42 +33,33 @@ export default function Details({ route, navigation }: any) {
     <ImageBackground
       style={styles.background}
       blurRadius={50}
-      // resizeMode="contain"
       source={{ uri: data.sprites.regular }}
     >
-      {/* <ImageBackground
-        style={styles.background2}
-        resizeMode="contain"
+      <LinearGradient
+        colors={['transparent', '#000']}
+        end={[0.4, 0.75]}
+        style={{ height: '100%', width: '100%' }}
+      >
+        <StatusBar style="light" />
+        <GoBackButton top={'4%'} />
+        <HeartAnimation />
+        <Text style={styles.pokemonId}>#{data.pokedexId}</Text>
+        <SafeAreaView style={styles.container} key={data.pokedexId}>
+          <Image
+            style={styles.cardImage}
+            source={{
+              uri: data.sprites.regular,
+            }}
+          />
+          <Text style={styles.pokemonName}>{data.name.en}</Text>
 
-        source={require('../assets/selectedPokemonPage/background2.png')}
-      > */}
-      <StatusBar style="light" />
-      <GoBackButton top={'10%'} />
-
-      <HeartAnimation />
-
-      <SafeAreaView style={styles.container}>
-        <View>
-          <View key={data.pokedexId}>
-            <Text style={styles.pokemonId}>#{data.pokedexId}</Text>
-            <Text style={styles.pokemonName}>{data.name.en}</Text>
-            <Image
-              style={styles.cardImage}
-              source={{
-                uri: data.sprites.regular,
-              }}
-            />
-
-            <View style={styles.typesContainer}>
-              <TypesComponent data={data} />
-            </View>
+          <View style={styles.typesContainer}>
+            <TypesComponent data={data} textColor="white" />
           </View>
-        </View>
-      </SafeAreaView>
-
-      {/* <ButtonScrollView /> */}
+        </SafeAreaView>
+        <ButtonMenu data={data} />
+      </LinearGradient>
     </ImageBackground>
-    // </ImageBackground>
   );
 }
 
@@ -101,11 +93,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  background2: {
-    flex: 1,
-    opacity: 0.3,
-  },
-
   text: {
     top: 100,
     color: 'white',
@@ -117,7 +104,9 @@ const styles = StyleSheet.create({
   },
 
   pokemonId: {
-    top: '15%',
+    position: 'absolute',
+    top: '4%',
+    alignSelf: 'center',
     color: 'white',
     textAlign: 'center',
     fontSize: 25,
@@ -127,7 +116,9 @@ const styles = StyleSheet.create({
   },
 
   pokemonName: {
-    top: '100%',
+    width: 'auto',
+    height: 'auto',
+    marginVertical: 10,
     color: 'white',
     textAlign: 'center',
     fontSize: 40,
@@ -137,13 +128,14 @@ const styles = StyleSheet.create({
   },
 
   cardImage: {
-    height: 400,
-    resizeMode: 'cover',
+    height: '80%',
+    width: '100%',
+    // overflow: 'visible',
+    // resizeMode: 'cover',
     borderRadius: 10,
   },
 
   typesContainer: {
     alignItems: 'center',
-    
   },
 });

@@ -20,9 +20,50 @@ const typeColors = {
   Ténèbres: '#705848',
 } as const;
 
-
 export type PokemonTypes = keyof typeof typeColors;
 
 export const getTypeColor = (typeName: PokemonTypes) => {
   return typeColors[typeName] || '#A8A8A8';
+};
+
+export const getBackgroundType = (typeName: PokemonTypes) => {
+  switch (typeName) {
+    case 'Plante':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Feu':
+      return require('../assets/backgroundTypes/feu.png');
+    case 'Eau':
+      return require('../assets/backgroundTypes/eau.png');
+    case 'Acier':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Combat':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Insecte':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Normal':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Poison':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Roche':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Sol':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Spectre':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Vol':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Dragon':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Électrik':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Glace':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Psy':
+      return require('../assets/backgroundTypes/plante.png');
+    case 'Ténèbres':
+      return require('../assets/backgroundTypes/plante.png');
+
+    default:
+      return require('../assets/backgroundTypes/eau.png');
+  }
 };

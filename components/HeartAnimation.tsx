@@ -65,8 +65,9 @@ const HeartAnimation = () => {
 
 const styles = StyleSheet.create({
   heartContainer: {
+    flex: 1,
     position: 'absolute',
-    top: '12%',
+    top: '7%',
     right: '9%',
     alignItems: 'center',
     justifyContent: 'center',

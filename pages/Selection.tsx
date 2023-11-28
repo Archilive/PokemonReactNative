@@ -12,11 +12,10 @@ import {
 } from 'react-native';
 import { useGetAllCards } from '../hooks/useGetAllCards';
 import TypesComponent from '../components/TypesComponent';
-import { getTypeColor } from '../themes/themes';
+import { getBackgroundType, getTypeColor } from '../themes/themes';
 import GoBackButton from '../components/GoBackButton';
 
 export default function Selection({ navigation }: any) {
-  
   const navigateToSelect = (pokemonId: number) => {
     navigation.navigate('Details', { pokemonId });
   };
@@ -79,13 +78,18 @@ export default function Selection({ navigation }: any) {
                 key={card.pokedexId}
               >
                 <Image
+                  source={getBackgroundType(card.types[0].name)}
+                  //
+                  style={styles.backgroundType}
+                />
+                <Image
                   style={styles.cardImage}
                   source={{
                     uri: card.sprites.regular,
                   }}
                 />
                 <Text style={styles.pokemonName}>{card.name.fr}</Text>
-                <TypesComponent data={card} />
+                <TypesComponent data={card} textColor="#000000" />
               </TouchableOpacity>
             ))
           ) : (
@@ -164,12 +168,10 @@ const styles = StyleSheet.create({
     padding: 12,
   },
 
-  pokemonName: {
-    marginTop: 'auto',
-    color: '#000000',
-    fontSize: 20,
-    fontWeight: '400',
-    marginLeft: 5,
+  backgroundType: {
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
   },
 
   cardImage: {
@@ -180,7 +182,15 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     alignSelf: 'center',
     top: '-30%',
-    // pointerEvents: 'none',
+    zIndex: 1,
+  },
+
+  pokemonName: {
+    marginTop: 'auto',
+    color: '#000000',
+    fontSize: 20,
+    fontWeight: '400',
+    marginLeft: 5,
   },
 
   user: {

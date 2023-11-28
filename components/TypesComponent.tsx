@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const TypeDetails = ({ typeData }: any) => {
+const TypeDetails = ({ typeData, textColor }: any) => {
   if (!typeData.name) {
     return null;
   }
@@ -11,9 +11,8 @@ const TypeDetails = ({ typeData }: any) => {
       <Image style={styles.types} source={{ uri: typeData.image }} />
       <Text
         style={{
-          color: 'black',
+          color: textColor || 'white',
           textAlign: 'center',
-          
         }}
       >
         {typeData.name}
@@ -22,11 +21,13 @@ const TypeDetails = ({ typeData }: any) => {
   );
 };
 
-const TypesComponent = ({ data }: any) => {
+const TypesComponent = ({ data, textColor }: any) => {
   return (
     <View style={{ flexDirection: 'row' }}>
-      <TypeDetails typeData={data.types[0]} />
-      {data.types[1]?.name && <TypeDetails typeData={data.types[1]} />}
+      <TypeDetails typeData={data.types[0]} textColor={textColor} />
+      {data.types[1]?.name && (
+        <TypeDetails typeData={data.types[1]} textColor={textColor} />
+      )}
     </View>
   );
 };

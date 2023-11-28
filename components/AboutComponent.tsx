@@ -1,36 +1,76 @@
 import React from 'react';
-import { ScrollView, Text, StyleSheet, View } from 'react-native';
+import { ScrollView, Text, StyleSheet, View, Image } from 'react-native';
 
-export default function AboutComponent() {
+export default function AboutComponent({ weight, height }: any) {
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <Text style={styles.title}>About Us</Text>
+    <ScrollView>
       <Text style={styles.description}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec metus
-        eu justo elementum consectetur a nec velit. Curabitur in hendrerit nisi.
-        Nullam consectetur diam id libero fermentum, ut facilisis turpis
-        aliquam. Donec gravida euismod erat, eu viverra augue varius id. Fusce
-        id fermentum velit. Aliquam euismod orci nec consectetur tincidunt.
-        Integer vel lacus ac elit pellentesque gravida. Vestibulum euismod justo
-        vel elit feugiat, nec interdum erat tristique.
+        Having been domesticated from birth, Bulbasaur is regarded as both a rar
+        and welf-behaved Pokémon.
       </Text>
+      <View style={styles.pokemonInfoContainer}>
+        <View style={styles.infoItem}>
+          <Image
+            style={styles.iconItem}
+            source={require('../assets/balance.png')}
+          />
+          <Text style={styles.textInfoItem}>{weight}</Text>
+        </View>
+        <View style={styles.middlebar} />
+        <View style={styles.infoItem}>
+          <Image
+            style={styles.iconItem}
+            source={require('../assets/arrow_height.png')}
+          />
+          <Text style={styles.textInfoItem}>{height}</Text>
+        </View>
+      </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollViewContent: {
-    flexGrow: 1,
-    padding: 16,
+  pokemonInfoContainer: {
+    alignSelf: 'center',
+    backgroundColor: '#444444',
+    display: 'flex',
+    flexDirection: 'row',
+    width: 380,
+    height: 95,
+    alignItems: 'center',
+    borderRadius: 8,
+    marginBottom: 8,
   },
-  title: {
-    color: 'white',
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 16,
-  },
+
   description: {
-    fontSize: 16,
-    lineHeight: 24,
+    width: 380,
+    color: '#999999',
+    fontSize: 14,
+    alignSelf: 'center',
+    marginBottom: 32,
+  },
+
+  infoItem: {
+    flexDirection: 'row',
+    width: '50%',
+    justifyContent: 'center',
+  },
+
+  textInfoItem: {
+    color: '#FFFFFF',
+    fontWeight: '400',
+    textAlign: 'center',
+  },
+
+  iconItem: {
+    width: 24,
+    height: 24,
+    marginRight: 8,
+  },
+
+  middlebar: {
+    width: 1,
+    height: 47,
+    backgroundColor: '#666666',
   },
 });
