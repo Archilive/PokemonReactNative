@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     overflow: 'hidden',
     paddingHorizontal: 24,
+    paddingRight: 12,
   },
 
   scrollViewContent: {
@@ -95,6 +96,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
 
   titleContent: {
@@ -108,6 +110,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 24,
     fontWeight: 'bold',
+    width: 50,
   },
 
   description: {
@@ -118,9 +121,10 @@ const styles = StyleSheet.create({
   },
 
   statsImage: {
-    width: '100%',
+    width: '70%',
     height: '100%',
-    justifyContent: 'flex-start',
+    // justifyContent: 'flex-end',
+    // alignItems: 'flex-start',
   },
 });
 

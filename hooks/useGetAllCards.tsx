@@ -38,12 +38,20 @@ export type Card = {
     multiplier: number;
   }[];
   evolution: {
-    pre: null;
-    next: {
-      pokedexId: number;
-      name: string;
-      condition: string;
-    }[];
+    pre:
+      | {
+          pokedexId: number;
+          name: string;
+          condition: string;
+        }[]
+      | null;
+    next:
+      | {
+          pokedexId: number;
+          name: string;
+          condition: string;
+        }[]
+      | null;
     mega: null;
   };
   height: string;
@@ -71,10 +79,9 @@ export const useGetAllCards = () => {
 
   const filterData = data
     ? data.filter(
-        (card) =>
-          card.generation === 1 &&
-          card.pokedexId !== 0 &&
-          (card.evolution == null || card.evolution.next == null)
+        (card) => card.generation === 1 && card.pokedexId !== 0
+        // &&
+        // (card.evolution == null || card.evolution.next == null)
       )
     : [];
   return { data: filterData, ...rest };

@@ -14,14 +14,20 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import EvolutionComponent from './EvolutionComponent';
+import { Card } from '../hooks/useGetAllCards';
 
-const ButtonMenu = ({ data }: any) => {
+interface ButtonMenuProps {
+  data: Card;
+}
+
+const ButtonMenu = ({ data }: ButtonMenuProps) => {
   const sections = ['About', 'Stats', 'Moves', 'Evolutions'];
   const [selectedSection, setSelectedSection] = useState(sections[0]);
 
   const animatedValue = useSharedValue(0);
 
-  const handlePress = (section: any) => {
+  const handlePress = (section: string) => {
     setSelectedSection(section);
 
     if (
@@ -56,6 +62,17 @@ const ButtonMenu = ({ data }: any) => {
             spAttack={data.stats.spe_atk}
             spDefense={data.stats.spe_def}
             speed={data.stats.vit}
+          />
+        );
+      case 'Evolutions':
+        const evolutionId =
+          data.evolution.pre?.[0]?.pokedexId || data.pokedexId;
+
+        return (
+          <EvolutionComponent
+            data={data}
+            id={evolutionId}
+            name={data.name.fr}
           />
         );
       default:
@@ -127,7 +144,7 @@ const styles = StyleSheet.create({
   },
 
   contentContainer: {
-    paddingVertical: 16,
+    marginVertical: 16,
     width: '100%',
   },
 });
