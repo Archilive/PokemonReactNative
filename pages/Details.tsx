@@ -51,7 +51,7 @@ export default function Details({ route }: any) {
               uri: data.sprites.regular,
             }}
           />
-          <Text style={styles.pokemonName}>{data.name.en}</Text>
+          <Text style={styles.pokemonName}>{data.name.fr}</Text>
 
           <View style={styles.typesContainer}>
             <TypesComponent data={data} textColor="white" />
