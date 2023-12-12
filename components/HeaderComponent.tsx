@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   pokemonId: {
     color: 'white',
     textAlign: 'center',
+    fontFamily: 'ClashDisplay-Semibold',
     fontSize: 25,
     fontWeight: '400',
     lineHeight: 40,

@@ -52,7 +52,7 @@ const HeartAnimation = () => {
       <TouchableOpacity style={styles.heart} onPress={toggleHeart}>
         <Animated.Image
           source={require('../assets/selectedPokemonPage/heart.png')}
-          style={[styles.heart, heartImageStyle]}
+          style={[styles.initialHeart, heartImageStyle]}
         />
         <Animated.Image
           source={require('../assets/selectedPokemonPage/heart_filled.png')}
@@ -64,7 +64,14 @@ const HeartAnimation = () => {
 };
 
 const styles = StyleSheet.create({
-  heartContainer: {},
+  heartContainer: {
+    // position: 'absolute',
+  },
+  initialHeart: {
+    position: 'absolute',
+    width: 52,
+    height: 52,
+  },
   heart: {
     width: 52,
     height: 52,
