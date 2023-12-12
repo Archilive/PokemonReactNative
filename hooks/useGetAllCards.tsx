@@ -79,9 +79,10 @@ export const useGetAllCards = () => {
 
   const filterData = data
     ? data.filter(
-        (card) => card.generation === 1 && card.pokedexId !== 0
-        // &&
-        // (card.evolution == null || card.evolution.next == null)
+        (card) =>
+          card.generation === 1 &&
+          card.pokedexId !== 0 &&
+          (card.evolution == null || card.evolution.next == null)
       )
     : [];
   return { data: filterData, ...rest };

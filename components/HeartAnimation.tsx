@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   heartContainer: {
     flex: 1,
     position: 'absolute',
-    top: '7%',
+    top: '9%',
     right: '9%',
     alignItems: 'center',
     justifyContent: 'center',

@@ -32,7 +32,7 @@ export default function Selection({ navigation }: any) {
       resizeMode="contain"
       source={require('../assets/selectPage/pokeball.png')}
     >
-      <GoBackButton top={'4%'} />
+      <GoBackButton top={'7%'} />
 
       <Image
         style={styles.user}
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     height: 48,
     borderRadius: 9,
     position: 'absolute',
-    top: '4%',
+    top: '7%',
     left: '84%',
   },
 });

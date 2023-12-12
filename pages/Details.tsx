@@ -41,7 +41,7 @@ export default function Details({ route }: any) {
         style={{ height: '100%', width: '100%' }}
       >
         <StatusBar style="light" />
-        <GoBackButton top={'4%'} />
+        <GoBackButton top={'7%'} />
         <HeartAnimation />
         <Text style={styles.pokemonId}>#{data.pokedexId}</Text>
         <SafeAreaView style={styles.container} key={data.pokedexId}>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
 
   pokemonId: {
     position: 'absolute',
-    top: '4%',
+    top: '6.5%',
     alignSelf: 'center',
     color: 'white',
     textAlign: 'center',
