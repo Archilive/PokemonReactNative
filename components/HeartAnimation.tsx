@@ -64,19 +64,10 @@ const HeartAnimation = () => {
 };
 
 const styles = StyleSheet.create({
-  heartContainer: {
-    flex: 1,
-    position: 'absolute',
-    top: '9%',
-    right: '9%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 1,
-  },
+  heartContainer: {},
   heart: {
     width: 52,
     height: 52,
-    position: 'absolute',
   },
 });
 

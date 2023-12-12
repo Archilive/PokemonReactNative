@@ -80,8 +80,8 @@ export default function EvolutionComponent({
     const isFirstEvolution = data.evolution.pre;
     const isThirdEvolution = data.evolution.next;
 
-    const secondEvolution = data.evolution.next?.[0];
-    const thirdEvolution = data.evolution.next?.[1];
+    const secondEvolution = data.evolution.next?.[0] ?? null;
+    const thirdEvolution = data.evolution.next?.[1] ?? null;
 
     if (data.evolution.pre === null && data.evolution.next === null) {
       evolutionList.push(renderEvolutionLastEvolution(id, name));

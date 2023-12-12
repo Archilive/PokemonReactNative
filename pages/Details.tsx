@@ -8,6 +8,8 @@ import {
   Image,
   ActivityIndicator,
   ImageBackground,
+  StatusBar as StatusBarRN,
+  Dimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useGetCardById } from '../hooks/useGetCardById';
@@ -15,6 +17,7 @@ import HeartAnimation from '../components/HeartAnimation';
 import TypesComponent from '../components/TypesComponent';
 import GoBackButton from '../components/GoBackButton';
 import ButtonMenu from '../components/ButtonMenuComponent';
+import HeaderComponent from '../components/HeaderComponent';
 
 export default function Details({ route }: any) {
   const { pokemonId } = route.params;
@@ -30,6 +33,12 @@ export default function Details({ route }: any) {
   }
 
   return (
+    // <SafeAreaView
+    //   style={{
+    //     flex: 1,
+    //     // backgroundColor: 'black',
+    //   }}
+    // >
     <ImageBackground
       style={styles.background}
       blurRadius={50}
@@ -41,9 +50,7 @@ export default function Details({ route }: any) {
         style={{ height: '100%', width: '100%' }}
       >
         <StatusBar style="light" />
-        <GoBackButton top={'7%'} />
-        <HeartAnimation />
-        <Text style={styles.pokemonId}>#{data.pokedexId}</Text>
+        <HeaderComponent pokedexId={data.pokedexId} like={true} />
         <SafeAreaView style={styles.container} key={data.pokedexId}>
           <Image
             style={styles.cardImage}
@@ -60,6 +67,7 @@ export default function Details({ route }: any) {
         <ButtonMenu data={data} />
       </LinearGradient>
     </ImageBackground>
+    // </SafeAreaView>
   );
 }
 
@@ -103,18 +111,18 @@ const styles = StyleSheet.create({
     lineHeight: 40,
   },
 
-  pokemonId: {
-    position: 'absolute',
-    top: '6.5%',
-    alignSelf: 'center',
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 25,
-    fontStyle: 'normal',
-    fontWeight: '400',
-    lineHeight: 40,
-    zIndex: 1,
-  },
+  // pokemonId: {
+  //   position: 'absolute',
+  //   top: '6.5%',
+  //   alignSelf: 'center',
+  //   color: 'white',
+  //   textAlign: 'center',
+  //   fontSize: 25,
+  //   fontStyle: 'normal',
+  //   fontWeight: '400',
+  //   lineHeight: 40,
+  //   zIndex: 1,
+  // },
 
   pokemonName: {
     width: 'auto',

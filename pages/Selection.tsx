@@ -13,7 +13,7 @@ import {
 import { useGetAllCards } from '../hooks/useGetAllCards';
 import TypesComponent from '../components/TypesComponent';
 import { getBackgroundType, getTypeColor } from '../themes/themes';
-import GoBackButton from '../components/GoBackButton';
+import HeaderComponent from '../components/HeaderComponent';
 
 export default function Selection({ navigation }: any) {
   const navigateToSelect = (pokemonId: number) => {
@@ -32,12 +32,7 @@ export default function Selection({ navigation }: any) {
       resizeMode="contain"
       source={require('../assets/selectPage/pokeball.png')}
     >
-      <GoBackButton top={'7%'} />
-
-      <Image
-        style={styles.user}
-        source={require('../assets/selectPage/user.png')}
-      />
+      <HeaderComponent like={false} />
 
       <View style={styles.container}>
         <StatusBar style="auto" />
@@ -191,14 +186,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '400',
     marginLeft: 5,
-  },
-
-  user: {
-    width: 48,
-    height: 48,
-    borderRadius: 9,
-    position: 'absolute',
-    top: '7%',
-    left: '84%',
   },
 });
