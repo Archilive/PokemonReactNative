@@ -13,11 +13,11 @@ export default function EvolutionComponent({
   data,
   id,
   name,
-}: EvolutionMenuProps) {
+}: Readonly<EvolutionMenuProps>) {
   const renderEvolution = (
     pokemonId: number,
     pokemonName: string,
-    levelupTransition: string
+    levelupTransition?: string
   ) => (
     <View key={pokemonId}>
       <View style={styles.container}>
@@ -44,7 +44,7 @@ export default function EvolutionComponent({
     </View>
   );
 
-  const renderEvolutionLastIteration = (
+  const renderEvolutionLastEvolution = (
     pokemonId: number,
     pokemonName: string
   ) => (
@@ -70,45 +70,120 @@ export default function EvolutionComponent({
   );
 
   const renderEvolutionChain = () => {
-    const evolutionChain = [];
-    let currentId = id;
-    let levelupTransition = 'level 1'; // data.evolution.next?.[0].condition;
+    const evolutionList = [];
 
-    const renderEvolutionRecursively = (evolutionData: any) => {
-      if (evolutionData && evolutionData.length > 0) {
-        const currentEvolution = evolutionData.pop();
+    const twoEvolutionFromTheTop = data.evolution.pre?.length == 1;
+    const twoEvolution = data.evolution.next?.length == 1;
+    const threeEvolutionFromTheTop = data.evolution.pre?.length == 2;
+    const threeEvolution = data.evolution.next?.length == 2;
 
-        evolutionChain.push(
-          renderEvolution(currentId++, currentEvolution.name, levelupTransition)
-        );
-        renderEvolutionRecursively(evolutionData);
-      }
-    };
+    const isFirstEvolution = data.evolution.pre;
+    const isThirdEvolution = data.evolution.next;
 
-    // Afficher les évolutions précédentes
-    renderEvolutionRecursively(data.evolution.pre);
+    const secondEvolution = data.evolution.next?.[0];
+    const thirdEvolution = data.evolution.next?.[1];
 
-    // Ajouter l'évolution actuelle
-    evolutionChain.push(renderEvolution(currentId++, name, levelupTransition));
-
-    // if (data.evolution.next[1] === null) {
-    //     data.evolution.next.reverse().forEach((nextEvolution: any) => {
-    //       evolutionChain.push(
-    //         renderEvolutionLastIteration(currentId++, nextEvolution.name)
-    //       );
-    //     });
-    //   }
-
-    // Afficher les évolutions suivantes
-    if (data.evolution.next !== null) {
-      data.evolution.next.reverse().forEach((nextEvolution: any) => {
-        evolutionChain.push(
-          renderEvolution(currentId++, nextEvolution.name, levelupTransition)
-        );
-      });
+    if (data.evolution.pre === null && data.evolution.next === null) {
+      evolutionList.push(renderEvolutionLastEvolution(id, name));
+      return evolutionList;
     }
 
-    return evolutionChain;
+    if (isFirstEvolution === null) {
+      console.log(data.evolution);
+      // évolution 1
+      if (twoEvolution) {
+        evolutionList.push(
+          renderEvolution(
+            id,
+            name,
+            `${data.evolution.next?.[0].condition ?? 'N/A'}`
+          )
+        );
+        evolutionList.push(
+          renderEvolutionLastEvolution(
+            id + 1,
+            `${data.evolution.next?.[0].name}`
+          )
+        );
+      }
+
+      if (threeEvolution) {
+        if (secondEvolution) {
+          evolutionList.push(
+            renderEvolution(
+              id,
+              name,
+              `${data.evolution.next?.[0].condition ?? 'N/A'}`
+            )
+          );
+        }
+        if (secondEvolution) {
+          evolutionList.push(
+            renderEvolution(
+              id + 1,
+              secondEvolution.name,
+              `${data.evolution.next?.[1].condition}`
+            )
+          );
+        }
+        if (thirdEvolution) {
+          evolutionList.push(
+            renderEvolutionLastEvolution(id + 2, thirdEvolution.name)
+          );
+        }
+      }
+    } else if (isThirdEvolution === null && threeEvolutionFromTheTop) {
+      // évolution 3
+      evolutionList.push(
+        renderEvolution(
+          id,
+          `${data.evolution.pre?.[0].name}`,
+          `${data.evolution.pre?.[0].condition ?? 'N/A'}`
+        )
+      );
+      evolutionList.push(
+        renderEvolution(
+          id + 1,
+          `${data.evolution.pre?.[1].name}`,
+          `${data.evolution.pre?.[1].condition}`
+        )
+      );
+
+      evolutionList.push(renderEvolutionLastEvolution(id + 2, name));
+    } else {
+      // évolution 2
+
+      if (twoEvolutionFromTheTop && secondEvolution === null) {
+        evolutionList.push(
+          renderEvolution(
+            id,
+            `${data.evolution.pre?.[0].name}`,
+            `${data.evolution.pre?.[0].condition ?? 'N/A'}`
+          )
+        );
+        evolutionList.push(renderEvolutionLastEvolution(id + 1, name));
+        return evolutionList;
+      }
+
+      if (data.evolution.pre?.[0] && secondEvolution) {
+        evolutionList.push(
+          renderEvolution(
+            id,
+            `${data.evolution.pre[0].name}`,
+            `${data.evolution.pre[0].condition ?? 'N/A'}`
+          )
+        );
+      }
+      evolutionList.push(
+        renderEvolution(id + 1, name, data.evolution.next?.[0].condition)
+      );
+
+      evolutionList.push(
+        renderEvolutionLastEvolution(id + 2, `${data.evolution.next?.[0].name}`)
+      );
+    }
+
+    return evolutionList;
   };
 
   return (

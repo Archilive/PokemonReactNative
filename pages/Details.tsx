@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
     fontWeight: '400',
     lineHeight: 40,
+    zIndex: 1,
   },
 
   pokemonName: {
