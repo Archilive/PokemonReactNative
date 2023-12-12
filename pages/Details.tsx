@@ -110,13 +110,13 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     fontSize: 25,
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontFamily: 'Montserrat-Semibold',
     lineHeight: 40,
     zIndex: 1,
   },
 
   pokemonName: {
+    fontFamily: 'Montserrat-Semibold',
     width: 'auto',
     height: 'auto',
     marginVertical: 10,

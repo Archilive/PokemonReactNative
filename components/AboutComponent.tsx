@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
 
   textInfoItem: {
     color: '#FFFFFF',
-    fontWeight: '400',
     textAlign: 'center',
+    fontFamily: 'Montserrat-Semibold',
   },
 
   iconItem: {
