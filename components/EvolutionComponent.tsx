@@ -33,7 +33,14 @@ export default function EvolutionComponent({
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.textInfoItem}>#{pokemonId}</Text>
-          <Text style={styles.textInfoItem}>{pokemonName}</Text>
+          <Text
+            style={{
+              fontFamily: 'Montserrat-Semibold',
+              ...styles.textInfoItem,
+            }}
+          >
+            {pokemonName}
+          </Text>
           <TypesComponent data={data} textColor="white" />
         </View>
       </View>
@@ -62,7 +69,14 @@ export default function EvolutionComponent({
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.textInfoItem}>#{pokemonId}</Text>
-          <Text style={styles.textInfoItem}>{pokemonName}</Text>
+          <Text
+            style={{
+              fontFamily: 'Montserrat-Semibold',
+              ...styles.textInfoItem,
+            }}
+          >
+            {pokemonName}
+          </Text>
           <TypesComponent data={data} textColor="white" />
         </View>
       </View>
@@ -89,7 +103,6 @@ export default function EvolutionComponent({
     }
 
     if (isFirstEvolution === null) {
-      console.log(data.evolution);
       // évolution 1
       if (twoEvolution) {
         evolutionList.push(
@@ -164,7 +177,6 @@ export default function EvolutionComponent({
         evolutionList.push(renderEvolutionLastEvolution(id + 1, name));
         return evolutionList;
       }
-
       if (data.evolution.pre?.[0] && secondEvolution) {
         evolutionList.push(
           renderEvolution(
@@ -235,7 +247,7 @@ const styles = StyleSheet.create({
   textInfoItem: {
     alignSelf: 'center',
     color: '#FFFFFF',
-    fontWeight: '400',
+    fontSize: 19,
   },
   transitionContainer: {
     flexDirection: 'row',

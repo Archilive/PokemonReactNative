@@ -8,14 +8,10 @@ import {
   Image,
   ActivityIndicator,
   ImageBackground,
-  StatusBar as StatusBarRN,
-  Dimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useGetCardById } from '../hooks/useGetCardById';
-import HeartAnimation from '../components/HeartAnimation';
 import TypesComponent from '../components/TypesComponent';
-import GoBackButton from '../components/GoBackButton';
 import ButtonMenu from '../components/ButtonMenuComponent';
 import HeaderComponent from '../components/HeaderComponent';
 
@@ -125,6 +121,7 @@ const styles = StyleSheet.create({
   // },
 
   pokemonName: {
+    fontFamily: 'Montserrat-Semibold',
     width: 'auto',
     height: 'auto',
     marginVertical: 10,

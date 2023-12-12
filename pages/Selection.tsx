@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import {
   StyleSheet,
@@ -40,9 +40,8 @@ export default function Selection({ navigation }: any) {
           Select your {''}
           <Text
             style={{
-              fontStyle: 'normal',
-              fontWeight: 'bold',
               fontSize: 35,
+              fontFamily: 'ClashDisplay-Semibold',
             }}
           >
             Pokémon
@@ -117,6 +116,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
+    fontFamily: 'ClashDisplay-Regular',
     color: 'white',
     fontSize: 35,
     fontWeight: '200',
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   pokedexLength: {
     color: '#FFF',
     fontSize: 15,
-    fontStyle: 'normal',
+    fontFamily: 'ClashDisplay-Regular',
     width: '28%',
     justifyContent: 'center',
     alignItems: 'center',
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
   },
 
   pokemonName: {
+    fontFamily: 'ClashDisplay-Semibold',
     marginTop: 'auto',
     color: '#000000',
     fontSize: 20,

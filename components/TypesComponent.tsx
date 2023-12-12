@@ -13,6 +13,7 @@ const TypeDetails = ({ typeData, textColor }: any) => {
         style={{
           color: textColor || 'white',
           textAlign: 'center',
+          fontFamily: 'ClashDisplay-Regular',
         }}
       >
         {typeData.name}

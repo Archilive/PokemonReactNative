@@ -14,18 +14,18 @@ export default function Home({ navigation }: any) {
     navigation.navigate('Selection');
   };
 
-  // const [width, height] = Dimensions.get('window');
-
   return (
     <ImageBackground
       style={styles.background}
       source={require('../assets/loadingPage/background2.png')}
     >
       <View style={styles.container}>
-        <Text style={styles.title}>Pokemon Finder</Text>
+        <Text style={{ textDecorationLine: 'line-through', ...styles.title }}>
+          Pokemon Finder
+        </Text>
 
         <TouchableOpacity style={styles.button} onPress={navigateToSelect}>
-          <Text style={styles.text}>Choose your Pokèmon</Text>
+          <Text style={styles.text}>Get Your Pokèmon</Text>
         </TouchableOpacity>
         <StatusBar style="auto" />
       </View>
@@ -49,10 +49,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
     fontSize: 40,
-    fontStyle: 'normal',
-    fontWeight: '400',
     lineHeight: 40,
     top: '20%',
+    fontFamily: 'ClashDisplay-Semibold',
   },
 
   text: {
@@ -60,15 +59,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     justifyContent: 'center',
     fontSize: 30,
-    fontStyle: 'normal',
-    fontWeight: '400',
+    fontFamily: 'ClashDisplay-Regular',
     lineHeight: 40,
   },
 
   button: {
     justifyContent: 'center',
     alignSelf: 'center',
-    borderRadius: 50,
+    borderRadius: 20,
     borderWidth: 2,
     borderColor: 'white',
     width: '80%',
